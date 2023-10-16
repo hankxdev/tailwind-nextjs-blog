@@ -1,0 +1,34 @@
+---
+title: 'Git: 删除本地所有分支并保留其中一个'
+date: 2018-12-20 08:57:54
+---
+
+<p>本地分支多了想删掉一些。(下面所有的命令中运行时均需要把 <code>BRANCH_NAME</code>  换成自己要操作的分支的名字)</p>
+
+
+<p>常用的命令是</p>
+
+
+git branch -D `BRANCH_NAME`
+
+
+<p>可是这样只能一个个删除。批量删除并保留一个分支，比如 <code>master</code>  分支的命令可以用下面这条命令：</p>
+
+
+git branch | grep -v "BRANCH_NAME" | xargs git branch -D 
+
+
+<p>如果你要经常这么做的话，还可以给这条命令添加个短名：</p>
+
+
+alias gdbm="git branch | grep -v "BRANCH_NAME" | xargs git branch -D"
+
+
+<p>如果要保留多个分支，可以在足命令中添加多个分支的名字：<code>master\|develop\|test_branch。</code></p>
+
+
+<p>上面的命令就变成：</p>
+
+
+git branch | grep -v "master\|develop\|test_branch" | xargs git branch -D 
+
